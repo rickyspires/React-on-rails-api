@@ -1,7 +1,7 @@
 import React from 'react';
 import Contact from './Contact';
 import contactData from './data';
-import './Collection.css';
+import styles from './Collection.sass';
 
 
 class Collection extends React.Component {
@@ -10,8 +10,6 @@ class Collection extends React.Component {
     this.setState({
       contacts: contactData,
     });
-
-
   }
 
   addContact = (e) => {
@@ -51,7 +49,7 @@ class Collection extends React.Component {
 
   render() {
     return(
-      <div id='Collection'>
+      <div id='Collection' className={styles.main}>
 
         {this.newContact()}
 
