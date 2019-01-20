@@ -1,12 +1,16 @@
 import React from 'react';
+import { observer } from 'mobx-react';
+
 import Contact from './Contact';
 import contactData from './data';
 import styles from './Collection.sass';
 
+@observer(['contacts'])
 
-class Collection extends React.Component {
+class Layout extends React.Component {
 
   componentWillMount() {
+    this.props.contacts.all
     this.setState({
       contacts: contactData,
     });
@@ -54,7 +58,7 @@ class Collection extends React.Component {
         {this.newContact()}
 
         <div className='puge-g'>
-          {this.state.contacts.map(info =>
+          {this.props.contacts.all.slice().map(info =>
             <Contact key={info.id} {...info}/>
           )}
         </div>
@@ -64,4 +68,4 @@ class Collection extends React.Component {
   }
 }
 
-export default Collection;
+export default Layout;
