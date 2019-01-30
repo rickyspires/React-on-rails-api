@@ -2,31 +2,22 @@ import React from 'react';
 import { observer } from 'mobx-react';
 
 import Contact from './Contact';
-import contactData from './data';
 import styles from './Collection.sass';
 
 @observer(['contacts'])
 
 class Layout extends React.Component {
 
-  componentWillMount() {
-    this.props.contacts.all
-    this.setState({
-      contacts: contactData,
-    });
-  }
-
   addContact = (e) => {
     e.preventDefault();
 
-    const contacts = this.state.contacts;
+    const contacts = this.props.contacts.all.slice();
     const newId = contacts[contacts.length - 1].id + 1;
 
-    this.setState({
-      contacts: contacts.concat({
-        id: newId,
-        name: this.refs.name.value,
-        email: this.refs.email.value }),
+    this.props.contacts.add({
+      id: newId,
+      name: this.refs.name.value,
+      email: this.refs.email.value
     });
 
     this.refs.name.value = null;
